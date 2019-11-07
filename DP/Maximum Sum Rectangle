@@ -1,0 +1,56 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int kadane(int a[], int n) {
+    // for(int i=0; i<n; ++i)
+    //     cout<<a[i]<<" ";
+    // cout<<endl;
+    int sum = a[0], curr_sum = a[0];
+    for(int i=1; i<n; ++i) {
+        curr_sum = max(a[i], a[i] + curr_sum);
+        if(curr_sum > sum)
+            sum = curr_sum;
+    }
+    return sum;
+}
+
+int main() {
+	// your code goes here
+	int n, m;
+	cin>>n>>m;
+	int a[n][m];
+	int preSum[n][m];
+	int sum = INT_MIN;
+	for(int i=0; i<n; ++i) {
+	    for(int j=0; j<m; ++j) {
+	        cin>>a[i][j];
+	        preSum[i][j] = a[i][j];
+	    }
+	}
+	for(int j=0; j<m; ++j)
+	    for(int i=1; i<n; ++i)
+	        preSum[i][j] += preSum[i-1][j];
+	
+// 	for(int i=0; i<n; ++i) {
+// 	    for(int j=0; j<m; ++j) {
+// 	        cout<<preSum[i][j]<<" ";
+// 	    }
+// 	    cout<<endl;
+// 	}
+// 	cout<<endl;
+	int temp[m];
+	for(int up=0; up<n; ++up) {
+	    for(int down=up; down<n; ++down) {
+	        for(int i=0; i<m; ++i) {
+	            temp[i] = preSum[down][i];
+	            if(up > 0)
+	                temp[i] -= preSum[up-1][i];
+	        }
+	        int curr_sum = kadane(temp, m);
+	        if(curr_sum > sum)
+	            sum = curr_sum;
+	    }
+	}
+	cout<<sum;
+	return 0;
+}
