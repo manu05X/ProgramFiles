@@ -54,3 +54,69 @@ ListNode* Solution::partition(ListNode* A, int B) {
     l1->next=c2;
     return c1;
 }
+
+/*
+ListNode* Solution::partition(ListNode* A, int B) {
+    if(A==NULL || A->next==NULL)
+        return A;
+    
+    ListNode* fakeHead = new ListNode(0), *temp=A, *last=A;
+    fakeHead->next = A;
+    A = fakeHead;
+    int n =0;
+    
+    while(temp){
+        temp=temp->next;
+        n++;
+    }
+    
+    while(last->next){
+        last=last->next;
+    }
+    
+    while(n--){
+        
+        if(fakeHead->next->val <B){
+            fakeHead=fakeHead->next;
+        }
+        
+        else{
+            last->next = new ListNode(fakeHead->next->val);
+            last = last->next;
+            fakeHead->next = fakeHead->next->next;
+        }
+    }
+    
+    return A->next;
+}
+
+java>
+public class Solution {
+    public ListNode partition(ListNode A, int B) {
+        ListNode n1 = new ListNode(0);
+        ListNode n2 = new ListNode(0);
+        
+        ListNode curr1 = n1;
+        ListNode curr2 = n2;
+        
+        while (A != null) {
+            if (A.val < B) {
+                curr1.next = new ListNode(A.val);
+                curr1 = curr1.next;
+            }
+            else {
+                curr2.next = new ListNode(A.val);
+                curr2 = curr2.next;
+            }
+            A = A.next;
+        }
+
+        curr1.next = n2.next;
+        
+        return n1.next;
+    }
+}
+
+
+*/
+
