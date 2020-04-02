@@ -32,6 +32,31 @@ int keypad(int num, string output[]){
     print anything, just return the number of strings inserted into the array.
     */
 }
+def keypad(n):
+  opt = ["","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"]
+  if(n==0):
+    lst = [""]
+    return lst
+  
+  small = n//10
+  remainder = n%10
+  lst = keypad(small)
+  lstlen = len(lst)
+  optionlen = len(opt[remainder])
+  lst *= optionlen
+  k = 0
+  for i in range(0,optionlen):
+    for j in range(0,lstlen):
+      lst[k] = lst[k] + opt[remainder][i]
+      k+=1
+  return lst
 
+
+t = int(input())
+print(t)
+l = keypad(t)
+
+for a in l:
+  print(a)
 
 
