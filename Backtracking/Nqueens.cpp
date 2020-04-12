@@ -129,10 +129,10 @@ void nQueenHelper(int n,int row){
     if(isPossible(n,row,j)){
       board[row][j] = 1;
       nQueenHelper(n,row+1);
-      board[row][j] = 0;
+      board[row][j] = 0			// place 0 again for next solution using backtracking 
     }
   }
-  return;
+  return;// backtrack to previous call
 
 }
 void placeNQueens(int n){

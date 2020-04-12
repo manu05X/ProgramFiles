@@ -5,8 +5,10 @@
 using namespace std;
 
 int subs(string input, string output[]) {
-	if (input.empty()) {
-		output[0] = "";
+			//if size is empty so length return 1 i.e only "" 
+	if (input.empty()) // base case
+	{
+		output[0] = "";// base case
 		return 1;
 	}
 
