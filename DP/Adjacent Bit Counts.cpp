@@ -38,39 +38,57 @@ Sample Output
 10 23076518
 */
 
-#include <cstdio>
-#include <cstring>
+#include <bits/stdc++.h>
+#define ll long long
+#define mod 1000000007
 
 using namespace std;
-
-int memo[99][100][2];
-
-int solve(int n, int adj, int last){
-    if(adj < 0) return 0;
-    if(n < 0) return (adj == 0);
-    
-    int &ret = memo[n][adj][last];
-    
-    if(ret == -1) ret = solve(n-1,adj,0) + solve(n-1,last == 1? adj-1 : adj,1);
-    
-    return ret;
+ 
+ll dp[101][101][2];
+int main()
+{
+	int t,n,k,i,j;
+	dp[1][0][0]=1;
+	dp[1][0][1]=1;
+	
+	for(i=2;i<=100;i++)
+	{
+		dp[i][i-1][0]=0;
+		dp[i][i-1][1]=1;
+		dp[i][0][0] = dp[i-1][0][0] + dp[i-1][0][1];
+		dp[i][0][1] = dp[i-1][0][0];
+		if(dp[i][0][0] >= mod)
+			dp[i][0][0]-=mod;
+	}
+	for(i=2;i<=100;i++)
+	{
+		for(j=1;j<i;j++)
+		{
+			dp[i][j][0] = dp[i-1][j][0] + dp[i-1][j][1];
+			dp[i][j][1] = dp[i-1][j][0] + dp[i-1][j-1][1];
+			
+			if(dp[i][j][0] >= mod)
+				dp[i][j][0]-=mod;
+			
+			if(dp[i][j][1] >= mod)
+				dp[i][j][1]-=mod;
+		}
+	}
+	cin>>t;
+	while(t--)
+	{
+		cin>>i>>n>>k;
+		if(n==0 && k==0)
+			cout<<i<<" 1"<<endl;
+		else
+		{
+			ll ans = dp[n][k][0] + dp[n][k][1];
+			if(ans >= mod)
+				ans-=mod;
+			cout<<i<<" "<<ans<<endl; 
+		}
+	}
 }
-
-int main(){
-    int T,tc,N,K;
-    
-    scanf("%d",&T);
-    memset(memo,-1,sizeof(memo));
-    
-    while(T--){
-        scanf("%d %d %d",&tc,&N,&K);
-        if(K >= N) printf("%d 0\n",tc);
-        else printf("%d %d\n",tc,solve(N-2,K,0) + solve(N-2,K,1));
-    }
-    
-    return 0;
-}
-
 
 
 /*#include <bits/stdc++.h>
@@ -153,5 +171,73 @@ int main()
         ans=dp[n][k][0]+dp[n][k][1];
         cout<<ind<<" "<<ans<<endl;
     }
+
+_______________________________________________________________________
+
+#include <bits/stdc++.h>
+ 
+using namespace std;
+const int M = 1000000007;
+ 
+long long go(long long n, long long k){
+    //vector<vector<vector<long long>>> dp(n+1, vector<vector<long long>>(k+1, vector<long long>(2,0)));
+ 
+    long long dp[n + 1][k + 1][2]; 
+    memset(dp, 0, sizeof(dp)); 
+    dp[1][0][0] = 1; 
+    dp[1][0][1] = 1;
+ 
+    for (int i = 2; i < n+1; ++i)
+    {
+        for (int j = 0; j <= k; ++j)
+        {
+            // if(j==0)
+            // {
+            // dp[i][j][1]=dp[i-1][j][0]%(1000000007);
+            // dp[i][j][0]=(dp[i-1][j][0]+dp[i-1][j][1])%(1000000007);
+            // }
+            // else
+            // {
+            // dp[i][j][0]=(dp[i-1][j][0]+dp[i-1][j][1])%(1000000007);
+            // dp[i][j][1]=(dp[i-1][j-1][1]+dp[i-1][j][0])%(1000000007);
+            // }
+ 
+            dp[i][j][0] = (dp[i-1][j][0]%M + dp[i-1][j][1]%M )%M;
+            if(j>0)
+                dp[i][j][1] = dp[i-1][j-1][1]%M;
+            dp[i][j][1] = (dp[i][j][1]%M + dp[i-1][j][0]%M )%M;
+        }
+    }
+ 
+    return (dp[n][k][0]) + dp[n][k][1];
+ 
+}
+
+
+int main( int argc , char ** argv )
+{
+	ios_base::sync_with_stdio(false) ; 
+	cin.tie(NULL) ; 
+	
+	long long p;
+	cin>>p;
+	while(p--){
+		long long s, n, k;
+		cin>>s>>n>>k;
+
+		cout << s << " " << go(n, k) << '\n';
+	}
+
+
+	return 0 ; 
+
+
+
+}
+
+
+
+
+
 
 }*/

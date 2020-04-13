@@ -37,8 +37,8 @@ Output:
 using namespace std; 
 
 #define N 9
-
-bool findEmptyLocation(int grid[N][N], int &row, int &col)
+//finding empty position in grid
+bool findEmptyLocation(int grid[N][N], int &row, int &col)// we pass reference of row and col using &
 {
 	for(int i = 0; i< N; i++)
 	{
@@ -53,7 +53,7 @@ bool findEmptyLocation(int grid[N][N], int &row, int &col)
 	}
 	return false;
 }	
-
+//Number not present in that row
 bool isSafeInRow(int grid[N][N],int row,int num){
 	for(int i = 0; i< N; i++)
 	{
@@ -64,7 +64,7 @@ bool isSafeInRow(int grid[N][N],int row,int num){
 	}
 	return true;
 }
-
+//Number not present in that column
 bool isSafeInColumn(int grid[N][N],int col,int num){
 	for(int i = 0; i< N; i++)
 	{
@@ -75,7 +75,7 @@ bool isSafeInColumn(int grid[N][N],int col,int num){
 	}
 	return true;
 }
-
+//Number not present in that box
 bool isSafeInGrid(int grid[N][N],int row, int col,int num){
 	for(int i = 0; i< 3; i++)
 	{
@@ -100,19 +100,21 @@ bool isSafe(int grid[N][N],int &row, int &col,int num)
 bool solveSudoku(int grid[N][N],int &row, int &col){
 	int row, col;
 	if(!findEmptyLocation(grid,row,col)){
-		return true;
+		return true;// if no empty so sudoku is filled and m correct till this position
 	}
 	
-	for(int i = 1; i<=N; i++)
+	for(int i = 1; i<=N; i++)//start filling from 1 to 9
 	{
-		if(isSafe(grid,row,col,i))
+		// before filling we must check if it is safe to fill the grid at that (row,col) with this num(i) or not
+		if(isSafe(grid,row,col,i)) 
 		{
+			//if true thrn fill with that num (i)
 			grid[row][col] = i;
 			if(solveSudoku(grid))
 			{
-				return true;
+				return true;// if sudoku is solved then return true
 			}
-			grid[row][col] = 0;
+			grid[row][col] = 0;// if sudoku is not solved then insert 0 at that current position and explore for another value
 		}
 	}
 	return false;

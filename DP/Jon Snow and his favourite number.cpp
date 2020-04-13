@@ -25,6 +25,114 @@ Sample Input
 Sample Output
 13 7
 */
+
+#include <bits/stdc++.h>
+
+using namespace std;
+void go(vector<int> rangers, int k, int x){
+	vector<int> buffer(1025, 0);
+	vector<int> ans(1025, 0);
+
+	int n = rangers.size();
+
+	for (int i = 0; i < n; ++i)
+	{
+
+		buffer[rangers[i]]++;
+	}
+
+	// for (int i = 0; i < buffer.size(); ++i)
+	// {
+	// 	if(buffer[i]!=0){
+	// 	cout << buffer[i]<<" "<< i << '\n';
+	// }
+	// }
+
+	ans = buffer;
+
+	while(k--){
+		int count = 0;
+		for (int i = 0; i < buffer.size(); ++i)
+		{
+			if (count%2==0){
+				if(buffer[i]>0){
+				int p = (buffer[i]+1)/2;
+				ans[i^x] += p;
+				ans[i] -= p;
+				}
+			}else{
+				if(buffer[i]>0){
+				int p = (buffer[i])/2;
+				ans[i^x] += p;
+				ans[i] -= p;
+				}	
+			}
+			count += buffer[i];
+			//cout << "count: "<<count;
+		}
+
+
+
+		buffer = ans;
+	//	fill(ans.begin(), ans.end(), 0);
+
+		
+	}
+	//return;
+
+	for (int i = buffer.size()-1; i >= 0; --i)
+	{
+		if (buffer[i]!=0)
+		{
+			cout << i<<" ";
+			break;
+		}
+	}
+	for (int i = 0; i < buffer.size(); ++i)
+	{
+		if (buffer[i] != 0)
+		{
+			cout << i << endl;
+			break;
+		}
+	}
+
+	
+
+	return;	
+
+
+
+
+}
+
+int main( int argc , char ** argv )
+{
+	ios_base::sync_with_stdio(false) ; 
+	cin.tie(NULL) ; 
+	
+	int n,k,x;
+	cin>>n>>k>>x;
+
+	vector<int> rangers(n, 0);
+	for (int i = 0; i < n; ++i)
+	{
+		cin>>rangers[i];
+	}
+
+	go(rangers, k, x);
+
+
+
+	return 0 ; 
+
+
+
+}
+
+
+
+/* partiall correct
 #include <cmath>
 #include <vector>
 #include <iterator>
@@ -63,3 +171,4 @@ int main() {
   cout << max << " " << min << endl;
   return 0;
 }
+*/
