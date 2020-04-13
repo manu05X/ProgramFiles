@@ -65,3 +65,47 @@ int main(){
     
 }
 
+
+/*
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int minCount(int n){
+    //non Recursive solution
+
+	std::vector<int> dp(n+1, 0);
+	dp[0] = 0;
+	dp[1] = 1;
+    for (int i = 1; i <= n; ++i)
+    {
+    	int count = INT_MAX;
+    	for (int j = 1; j <= i; ++j)
+    	{
+    		if (i-j*j<0)
+    		{
+    			break;
+    		}
+
+    		count = min(count, dp[i-j*j]);
+    	}
+    	dp[i] = 1+count;	
+    }
+
+    return dp[n];
+	
+}
+
+int main( int argc , char ** argv )
+{
+	ios_base::sync_with_stdio(false) ; 
+	cin.tie(NULL) ; 
+	
+	 int num;
+    cin >> num;
+    cout << minCount(num)<<endl;
+
+	return 0 ; 
+}
+
+*/

@@ -69,3 +69,65 @@ int main(){
     cout << getMin(arr, n);
     delete []arr;
 }
+
+/*
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int getMin(int *arr, int n){
+	//left case
+
+	std::vector<int> dp(n, 0);
+	dp[0] = 1;
+	for (int i = 1; i < n; ++i)
+	{
+		if(arr[i]>arr[i-1])
+			dp[i] = dp[i-1]+1;
+		else
+			dp[i] = 1;  // made changes here
+	}
+
+
+	dp[n-1] = max(dp[n-1], 1);
+
+	for (int i = n-2; i >= 0; --i)
+	{
+		if(arr[i+1]<arr[i])
+			dp[i] = max(dp[i], dp[i+1]+1);
+		// else
+		// 	dp[i] = max(dp[i+1]-1, dp[i]);
+	}
+	int sum = 0;
+
+	for (int i = 0; i < n; ++i)
+	{
+		sum+=dp[i];
+	}
+
+	return sum;
+
+}
+
+int main( int argc , char ** argv )
+{
+	ios_base::sync_with_stdio(false) ; 
+	cin.tie(NULL) ; 
+	 
+	int n;
+    cin >> n;
+    int *arr = new int[n];
+    for(int i = 0; i < n; i++){
+        cin >> arr[i];
+    }
+
+    cout << getMin(arr, n);
+    delete []arr;
+
+
+
+	return 0 ; 
+
+}
+
+*/

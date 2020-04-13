@@ -1,6 +1,4 @@
 /*
-PARTY - Problem
-Send Feedback
 You just received another bill which you cannot pay because you lack the money.
 Unfortunately, this is not the first time to happen, and now you decide to investigate the cause of your constant monetary shortness. The reason is quite obvious: the lion's share of your money routinely disappears at the entrance of party localities.
 You make up your mind to solve the problem where it arises, namely at the parties themselves. You introduce a limit for your party budget and try to have the most possible fun with regard to this limit.
@@ -46,3 +44,91 @@ Sample Output
 49 26
 48 32
 */
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+pair<int, int> go(vector<pair<int, int>> v, int n, int totalmoney){
+	//Initializing a (0,0) pair 2d DP array;
+	//Left to Right represents the budget starting from 0-total money
+	//Top to bottom represents the starting index of our chosen subvector from fun vector(pair).
+	//We'll work on subarray from that i to bottom of the fun vector
+	pair<int,int> pairzero = make_pair(0, 0);
+	vector<vector<pair<int, int>>> dp(n+1, vector<pair<int, int>>(totalmoney+1, pairzero));
+
+
+	for (int j = 1; j < totalmoney+1; ++j)
+	{
+		for (int i = n-1; i >= 0; --i)
+		{
+			if (v[i].first <= j)
+			{
+				pair<int, int> c1;
+				c1.first = v[i].first + dp[i+1][j-v[i].first].first;
+				c1.second = v[i].second + dp[i+1][j-v[i].first].second;
+
+			//	pair<int, int> c1 = make_pair(v[i].first, v[i].second)+dp[i+1][j-v[i].first];
+				pair<int, int> c2 = dp[i+1][j];
+
+				if (c1.second > c2.second)
+				{
+					dp[i][j] = c1;
+				}else if(c1.second < c2.second)
+					dp[i][j] = c2;
+				else{
+					if (c1.first <= c2.first)
+					{
+						dp[i][j] = c1;
+					}else
+						dp[i][j] = c2;
+				}
+
+
+			}else{
+
+				dp[i][j] = dp[i+1][j];
+
+			}
+		}
+	}
+
+	return dp[0][totalmoney];
+
+
+}
+
+
+int main( int argc , char ** argv )
+{
+	ios_base::sync_with_stdio(false) ; 
+	cin.tie(NULL) ; 
+	
+
+	while(1){
+		int totalmoney, n;
+		cin>>totalmoney>>n;
+
+		if (totalmoney == 0 || n==0)
+			break;
+		vector<pair<int, int>> v;
+
+		for (int i = 0; i < n; ++i)
+		{
+			int cost, fun;
+			cin>>cost>>fun;
+			v.push_back(make_pair(cost, fun));
+		}
+
+		pair<int, int> ans = go(v, n, totalmoney);
+
+		cout << ans.first <<" "<<ans.second << '\n';
+	}
+
+
+
+	return 0 ; 
+
+
+
+}
