@@ -1,11 +1,4 @@
 /*
-
-				Name: Mehul Chaturvedi
-				IIT-Guwahati
-
-*/
-
-/*
 				PROBLEM STATEMENT
 Gary is a teacher at XYZ school. To reward his N students he bought a packet of N candies all with different flavours. But the problem is some students like certain flavour while some doesn't. Now Gary wants to know the number of ways he can distribute these N candies to his N students such that every student gets exactly one candy he likes.
 Input Format :
