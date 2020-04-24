@@ -1,10 +1,7 @@
 /*
-				Name: Mehul Chaturvedi
-				IIT-Guwahati
-*/
-
-/*
 				PROBLEM STATEMENT
+				
+				Maximum XOR Subarray
 Given an array of n integers, find subarray whose xor is maximum.
 Input Format
 First line contains single integer n (1<=n<=1000000).
