@@ -12,24 +12,24 @@ Explanation: We get the minimum difference for a=5, b=6, c=6 as | max(a,b,c) - m
 int Solution::solve(vector<int> &A, vector<int> &B, vector<int> &C) {
     int i=A.size()-1,j=B.size()-1,k=C.size()-1;
     
-int cur_min=INT_MAX;
+	int cur_min=INT_MAX;
 
-while(i!=-1 && j!=-1 && k!=-1)
-{
-    int cur_value=max(A[i],max(B[j],C[k]))-min(A[i],min(B[j],C[k]));
+	while(i!=-1 && j!=-1 && k!=-1)
+	{
+		int cur_value=max(A[i],max(B[j],C[k]))-min(A[i],min(B[j],C[k]));
     
-    if(cur_value<cur_min)
-     cur_min=cur_value;
+		if(cur_value<cur_min)
+			cur_min=cur_value;
      
-     int cur_max=max(A[i],max(B[j],C[k]));
-     if(cur_max==A[i])
-     i-=1;
+		int cur_max=max(A[i],max(B[j],C[k]));
+		if(cur_max==A[i])
+			i-=1;
      
-     else if(cur_max==B[j])
-     j-=1;
+		else if(cur_max==B[j])
+			j-=1;
      
-     else
-     k-=1;
-}
-return cur_min;
+		else
+			k-=1;
+	}
+	return cur_min;
 }
