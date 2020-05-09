@@ -67,3 +67,19 @@ int Solution::solve(vector<int> &arr, int sum) {
     // Return the required answer 
     return ans; 
 }
+
+/*
+int Solution::solve(vector<int> &A, int B) {
+    int low=0,high=A.size()-1,ans=0;
+    while(low<high){
+        int sum = A[low]+A[high];
+        if(sum==B){
+            ans++;
+            low++;  high--;
+        }
+        else if(sum>B) high--;
+        else low++;
+    }
+    return ans;
+
+*/
