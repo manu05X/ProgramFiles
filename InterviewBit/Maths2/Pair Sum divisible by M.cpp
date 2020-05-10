@@ -1,8 +1,7 @@
 /*
 Pair Sum divisible by M
-
-Given an array of integers A and an integer B, find and return the number of pairs in A whose sum is divisible by B.
-Since the answer may be large, return the answer modulo (109 + 7).     
+Problem Description
+Given an array of integers A and an integer B, find and return the number of pairs in A whose sum is divisible by B. Since the answer may be large, return the answer modulo (109 + 7).     
 
 
 Problem Constraints
@@ -29,25 +28,27 @@ Input 2:
  B = 28
     
 
+
 Example Output
 Output 1:
  4
-
 Output 2:
  1
     
+
+
 Example Explanation
 Explanation 1:
- All pairs which are divisible by 2 are (1,3), (1,5), (2,4), (3,5) 
+ All pairs which are divisible by 2 are (1,3), (1,5), (2,4), (3,5). 
  So total 4 pairs.
+
 
 */
 
 //sol->
 
 #define MOD 1000000007
-int Solution::solve(vector<int> &A, int B) 
-{
+int Solution::solve(vector<int> &A, int B) {
     long long int n = A.size();
     long long int m[B];
    

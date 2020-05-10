@@ -48,25 +48,64 @@ int Solution::solve(int A) {
 
 
 /*
-#define ull unsigned long long
-#define mod 1000000007
-ull my_pow(ull val, ull power){ // Finding the mod power, in log(power) time.
-    ull ans=1, mul=val;
-    while (power){
-        if (power&1)    ans = ans*mul%mod;
-        mul = mul*mul%mod;
-        power >>= 1;
+const int N = 2000005;
+const long long mod = 1000000007;
+long long f[N],fi[N];
+int tc=0;
+
+long long modexp(long long a,long long n,long long m=mod){
+    long long r=1LL;
+    while(n){
+        if(n&1)
+            r=(r*a)%m;
+        a=(a*a)%m;
+        n>>=1LL;
     }
+    return r;
+}
+
+long long inv(long long a){
+    return modexp(a,mod-2);
+}
+
+void comb(){
+    if(tc)
+        return;
+    tc=1;
+    f[0]=f[1]=fi[0]=fi[1]=1LL;
+    for(long long i=2LL; i<N; ++i)
+        f[i]=(1LL*f[i-1]*i)%mod;
+    long long temp=inv(f[N-1]);
+    for(long long i=N-1; i>1; --i){
+        fi[i]=temp;
+        temp=(1LL*temp*i)%mod;
+    }
+}
+
+long long ncr(long long n,long long r){
+    if(r>n||r<0)
+        return 0LL;
+    if(r==0||r==n)
+        return 1LL;
+    if(r==1||r==n-1)
+        return n;
+    return (((1LL*f[n]*fi[r])%mod)*fi[n-r])%mod;
+}
+
+long long nthCatalan(int n){
+    long long ans=ncr(n+n,n);
+    ans=(1LL*ans*inv(n+1))%mod;
     return ans;
 }
+
+
 int Solution::solve(int A) {
-    ull ans=1, i=0;
-    for (i=1; i<A; i++){
-        ans = (4*i - 2)*ans%mod;        // Numerator
-        ans *= my_pow(i+1, mod-2);      // Denominator : We do modulo, using the idea from Fermat's little theorem
-        ans %= mod;
-    } 
+    //if(A==0)
+      //  return 1;
+    comb();
+    int ans=nthCatalan(A-1);
     return ans;
+    
 }
 ----------------------------------
 
