@@ -96,8 +96,9 @@ int solveit(vector<vector<int>>& grid) {
             for(int k=0; k<4; ++k){
                 dx=x+dir[k][0];
                 dy=y+dir[k][1];
-                if(dx>=0&&dx<n&&dy>=0&&dy<m&&grid[dx][dy]==1&&distance[x][y]+1<distance[dx][dy]){
-                    distance[dx][dy]=1+distance[x][y];
+                if(dx >= 0 && dx < n && dy >= 0 && dy < m& & grid[dx][dy] == 1 && distance[x][y]+1 < distance[dx][dy])
+				{
+                    distance[dx][dy] = 1+distance[x][y];
                     q.push({dx,dy});
                 }
             }
@@ -119,33 +120,43 @@ int Solution::solve(vector<vector<int> > &A) {
 }
 
 /*
-int Solution::solve(vector<vector<int> > &A) {
+int Solution::solve(vector<vector<int> > &A) 
+{
     queue<pair<int,int> > q;
     int ans=0;
-    for(int i=0;i<A.size();i++){
-        for(int j=0;j<A[0].size();j++){
-            if(A[i][j]==2){
+    for(int i=0;i<A.size();i++)
+	{
+        for(int j=0;j<A[0].size();j++)
+		{
+            if(A[i][j]==2)
+			{
                 pair<int,int> p = make_pair(i,j);
                 q.push(p);
             }
         }
     }
     
-    if(q.empty()){
+    if(q.empty())
+	{
         return -1;
     }
-    else{
-        pair<int,int> p=make_pair(-1,-1);
+    else
+	{
+        pair<int,int> p = make_pair(-1,-1);
         q.push(p);    
     }
     
-    while(!q.empty()){
+    while(!q.empty())
+	{
         pair <int,int> p= q.front();
         q.pop();
+		
         int i=p.first;
         int j=p.second;
-        if(i==-1&&j==-1){
-            if(!q.empty()){
+        if(i==-1&&j==-1)
+		{
+            if(!q.empty())
+			{
                 ans++;
                 pair<int,int> p= make_pair(-1,-1);
                 q.push(p); 
@@ -153,32 +164,40 @@ int Solution::solve(vector<vector<int> > &A) {
         }
         else{
             bool check=false;
-            if(i-1>=0&&i-1<A.size()){
-                if(A[i-1][j]==1){
+            if(i-1>=0&&i-1<A.size())
+			{
+                if(A[i-1][j]==1)
+				{
                     A[i-1][j]=2;
                     pair<int,int> p = make_pair(i-1,j);
                     q.push(p);
                 }
             }
             
-            if(i+1>=0&&i+1<A.size()){
-                if(A[i+1][j]==1){
+            if(i+1>=0&&i+1<A.size())
+			{
+                if(A[i+1][j]==1)
+				{
                     A[i+1][j]=2;
                     pair<int,int> p = make_pair(i+1,j);
                     q.push(p);
                 }
             }
             
-            if(j-1>=0&&j-1<A[0].size()){
-                if(A[i][j-1]==1){
+            if(j-1>=0&&j-1<A[0].size())
+			{
+                if(A[i][j-1]==1)
+				{
                     A[i][j-1]=2;
                     pair<int,int> p = make_pair(i,j-1);
                     q.push(p);
                 }
             }
             
-            if(j+1>=0&&j+1<A[0].size()){
-                if(A[i][j+1]==1){
+            if(j+1>=0&&j+1<A[0].size())
+			{
+                if(A[i][j+1]==1)
+				{
                     A[i][j+1]=2;
                     pair<int,int> p = make_pair(i,j+1);
                     q.push(p);
@@ -189,8 +208,10 @@ int Solution::solve(vector<vector<int> > &A) {
         
     }
     
-    for(int i=0;i<A.size();i++){
-        for(int j=0;j<A[0].size();j++){
+    for(int i=0;i<A.size();i++)
+	{
+        for(int j=0;j<A[0].size();j++)
+		{
             if(A[i][j]==1){
                 return -1;
             }
@@ -198,4 +219,88 @@ int Solution::solve(vector<vector<int> > &A) {
     }
     return ans;
 }
+______________________________________________________________________________
+class Solution {
+public:
+int k=0;
+
+struct test{
+    int x,y,z;
+    
+};
+int orangesRotting(vector<vector<int>>& grid) 
+{
+    
+    queue<test>q;
+    int n=0;
+    for(int i=0;i<grid.size();i++)
+    {
+        for(int j=0;j<grid[i].size();j++)
+        {
+            if(grid[i][j]==2 )
+                q.push({i,j,0});
+            if(grid[i][j]==1)
+                n++;
+        }
+    }
+    int res=0;
+    while(q.empty()==false)
+    {
+        test t=q.front();
+        q.pop();
+        int a=t.x;
+        int b=t.y;
+        int c=t.z;
+        if(a!=0)
+        {
+            if(grid[a-1][b]==1)
+            {
+                grid[a-1][b]=2;
+                q.push({a-1,b,c+1});
+                n--;
+            }
+            
+            
+        }
+        if(a!=grid.size()-1)
+        {
+            if(grid[a+1][b]==1)
+            {
+                grid[a+1][b]=2;
+                q.push({a+1,b,c+1});
+                n--;
+            }
+            
+            
+        }
+        if(b!=0)
+        {
+            if(grid[a][b-1]==1)
+            {
+                grid[a][b-1]=2;
+                q.push({a,b-1,c+1});
+                n--;
+            }
+            
+            
+        }
+        if(b!=grid[a].size()-1)
+        {
+            if(grid[a][b+1]==1)
+            {
+                grid[a][b+1]=2;
+                q.push({a,b+1,c+1});
+                n--;
+            }
+            
+            
+        }
+        res=c;
+    }
+    if(n!=0)
+        return -1;
+    else
+        return res;
+}
+};
 */
