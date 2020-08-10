@@ -38,7 +38,7 @@ class Solution
 		
 		int m=a[0].size();
 		queue<pair<int,int>>q;
-		vector<vector>vis(n,vector(m));
+		vector<vector<int>> vis(n,vector<int> (m));
 		
 		for(i=0;i<n;i++)
 		{
@@ -101,7 +101,8 @@ class Solution
 			int n=a.size(),i,j,ans=0;
 			if(!n)
 			return 0;
-			int m=a[0].size();vector<vector>vis(n,vector(m));
+			int m=a[0].size();
+			vector<vector<int>> vis(n,vector<int> (m));
 			for(i=0;i<n;i++)
 			{
 			for(j=0;j<m;j++)
