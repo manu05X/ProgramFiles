@@ -4,14 +4,18 @@ Published on 07 Mar 2020
 Challenging Task:
 
 
-The arrival and departure time of several trains are provided. Two disparate arrays are given: one with all the arrival times and another with the departure time in 24 hours clock. Write a program to find the minimum number of platforms needed in a given railway station.
+The arrival and departure time of several trains are provided. Two disparate arrays are 
+given: one with all the arrival times and another with the departure time in 24 hours clock. 
+Write a program to find the minimum number of platforms needed in a given railway station.
 
 
 
 Solution:
 
 
-Clue: The minimum number of platforms is nothing but the maximum number of trains that rest in the given railway station from the time limit between the arrival of the first train to the departure of the last train.
+Clue: The minimum number of platforms is nothing but the maximum number of trains that rest in 
+the given railway station from the time limit between the arrival of the first train to the departure 
+of the last train.
 
 
 
