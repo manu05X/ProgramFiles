@@ -49,31 +49,34 @@ void printSolution(int** solution,int n){
 void mazeHelp(int maze[][20],int n,int** solution,int x,int y){
 
 
-	if(x == n-1 && y == n-1){
-		solution[x][y] =1;
-		printSolution(solution,n);
-      	solution[x][y] =0;
+	if(x == n-1 && y == n-1)
+	{
+		solution[x][y] =1;	//	include in solution matrix
+		printSolution(solution,n);	// print solution matrix 
+      	//  solution[x][y] =0;
 		return;
 	}
-	if(x>=n || x<0 || y>=n || y<0 || maze[x][y] ==0 || solution[x][y] ==1){
-		return;
+	// for all these below condition we can't include in path so return 
+	if(x>=n || x<0 || y>=n || y<0 || maze[x][y] ==0 || solution[x][y] ==1)
+	{
+		return; 
 	}
-	solution[x][y] = 1;
-	mazeHelp(maze,n,solution,x-1,y);
-	mazeHelp(maze,n,solution,x+1,y);
-	mazeHelp(maze,n,solution,x,y-1);
-	mazeHelp(maze,n,solution,x,y+1);
-	solution[x][y] = 0;
+	solution[x][y] = 1;		// including current position in path
+	mazeHelp(maze,n,solution,x-1,y);	//exploring Up
+	mazeHelp(maze,n,solution,x+1,y);	//exploring down
+	mazeHelp(maze,n,solution,x,y-1);	//exploring Left
+	mazeHelp(maze,n,solution,x,y+1);	//exploring right
+	solution[x][y] = 0;		// after exploring all 4 direction from curr pos we put it 0  
+								//	so that it is available for other paths too be included in it
 }
-void ratInAMaze(int maze[][20], int n){
-
-  int** solution = new int*[n];
-  for(int i=0;i<n;i++){
-  	solution[i] = new int[n];
-  }
-  mazeHelp(maze,n,solution,0,0);
-
-
+void ratInAMaze(int maze[][20], int n)
+{	//dynamic allocation of array
+	int** solution = new int*[n];
+	for(int i=0;i<n;i++)
+	{
+		solution[i] = new int[n];
+    }
+	mazeHelp(maze,n,solution,0,0);
 }
 int main(){
 	int n; 

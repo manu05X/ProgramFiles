@@ -33,7 +33,10 @@ bool isPossible(int n,int row,int col){
 
   return true;
 }
-void nQueenHelper(int n,int row){
+void nQueenHelper(int n,int row)
+{
+	/* base case: If all queens are placed 
+    then return true */
   if(row==n){
     // We have reached some solution.
     // Print the board matrix
@@ -52,10 +55,17 @@ void nQueenHelper(int n,int row){
   // Place at all possible positions and move to smaller problem
   for(int j=0;j<n;j++){
 
-    if(isPossible(n,row,j)){
-      board[row][j] = 1;
-      nQueenHelper(n,row+1);
-      board[row][j] = 0;
+    if(isPossible(n,row,j))
+	{
+		/* Place this queen in board[row][j] */
+      board[row][j] = 1;	//first we check that possition by putting 1 
+							// Make result true if any placement is possible 
+      nQueenHelper(n,row+1);	
+	  
+	  /* If placing queen in board[i][col] 
+            doesn't lead to a solution, then 
+            remove queen from board[i][col] */
+      board[row][j] = 0;	//then we check that possition by putting 0 i.e backtrack
     }
   }
   return;
@@ -65,7 +75,7 @@ void placeNQueens(int n){
 
   memset(board,0,11*11*sizeof(int));
 
-  nQueenHelper(n,0);
+  nQueenHelper(n,0);	//calling nQueenHelper by passing srarting row 0
 
 }
 int main(){

@@ -13,7 +13,8 @@ int main() {
 }
 
  	
-	int longestBitonicSubarray(int *arr, int size) {
+int longestBitonicSubarray(int *arr, int size) 
+{
           // Length of increasing subarray ending at all indexes
    int *increasingSubSeq = new int[size];          //create increasing sub sequence array
    for (int i = 0; i < size; i++)
