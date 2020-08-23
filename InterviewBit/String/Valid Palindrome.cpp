@@ -67,3 +67,65 @@ public:
         return true;
     }
 };
+
+/*
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        int size = s.length();
+        
+        int fast = size-1;
+        int slow = 0;
+        while (fast > slow) {
+            while (fast >= 0 && !(isalpha(s[fast]) || isdigit(s[fast]))) fast --;
+            while (slow < size && !(isalpha(s[slow]) || isdigit(s[slow]))) slow ++;
+            
+            if (fast >= 0 && slow < size) {
+                if (!(isalpha(s[fast]) ^ isdigit(s[slow]))) return false;
+                else if (tolower(s[fast]) != tolower(s[slow])) return false;
+            }
+                
+            fast --;
+            slow ++;
+        }
+        return true;
+    }
+};
+________________________________________________________________
+
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        if(s.empty()) return true;
+        int n = s.size();
+        int i=0;
+        int j=n-1;
+        while(i<j){
+            while(!isValidChar(s[i]) && i<j){
+                i++;
+            }
+            while(!isValidChar(s[j]) && i<j){
+                j--;
+            }
+            if( tolower(s[i]) != tolower(s[j]) ){
+                return false;
+            }
+            i++;
+            j--;
+        }
+        return true;
+    }
+    
+    bool isValidChar(char c){
+        if( (c >= 'a' && c <= 'z') ||
+            (c >= 'A' && c <= 'Z') ||
+            (c >= '0' && c <= '9'))
+        {
+            return true;
+        }
+        return false;
+    } 
+};
+
+
+*/

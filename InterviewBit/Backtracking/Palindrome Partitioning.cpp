@@ -1,5 +1,5 @@
-//https://leetcode.com/problems/palindrome-partitioning/
-//22. Generate Parentheses
+//https://leetcode.com/problems/palindrome-partitioning/submissions/
+//131. Palindrome Partitioning
 
 
 class Solution {
@@ -28,7 +28,7 @@ public:
             //R+ADAR   RA+DAR   RAD+AR   RADA+R    RADAR+" "
             if(isPalindrome(s, index, i)) // check if left part is palindrome OR not
             {
-                // if true then proceed further in right part for partition
+                // if true then procide further in right part for partition
                 path.push_back(s.substr(index, i - index + 1)); // first save leftPar in temp i.e R 
                 dfs(i+1, s, path, ret); // call recursivly for right part i.e ADAR
                 path.pop_back();  // now empty temp for further cases i.e RA+DAR   RAD+AR   RADA+R    RADAR+" "
@@ -36,10 +36,8 @@ public:
         }
     }
     
-    bool isPalindrome(const string& s, int start, int end) 
-	{
-        while(start <= end) 
-		{
+    bool isPalindrome(const string& s, int start, int end) {
+        while(start <= end) {
             if(s[start++] != s[end--])
                 return false;
         }
