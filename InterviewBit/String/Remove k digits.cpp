@@ -148,4 +148,53 @@ public:
         return i == s.size() ? "0" : s.substr(i);
     }
 };
+__________________________________________________________________________________________________________________
+
+class Solution {
+public:
+    void buildLowest(string num, int k, string &res) {
+        if (k == 0) {
+            res.append(num);
+            return;
+        }
+
+        int length = num.length();
+
+        if (length <= k) {
+            return;
+        }
+
+        int minIndex = 0;
+        for (int i = 1; i <= k; i++) {
+            if (num[i] < num[minIndex])
+                minIndex = i;
+        }
+
+        res += num[minIndex];
+
+        string subStr = num.substr(minIndex + 1, length - 1);
+
+        buildLowest(subStr, k - minIndex, res);
+
+    }
+
+    string removeKdigits(string num, int k) {
+        string result = "";
+
+        buildLowest(num, k, result);
+
+        if (result.length() == 0)
+            result += '0';
+
+        while(result[0] == '0' && result.length() > 1) {
+            result = result.substr(1, result.length() - 1);
+        }
+
+        return result;
+    }
+};
+
+
+
+
 */
