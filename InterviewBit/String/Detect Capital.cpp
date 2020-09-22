@@ -1,5 +1,5 @@
  // https://leetcode.com/problems/detect-capital/
-520. Detect Capital
+//520. Detect Capital
 
 class Solution {
     bool isLower(char c)
