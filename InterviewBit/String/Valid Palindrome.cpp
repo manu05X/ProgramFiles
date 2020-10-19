@@ -71,22 +71,29 @@ public:
 /*
 class Solution {
 public:
-    bool isPalindrome(string s) {
+    bool isPalindrome(string s) 
+    {
         int size = s.length();
         
-        int fast = size-1;
-        int slow = 0;
-        while (fast > slow) {
-            while (fast >= 0 && !(isalpha(s[fast]) || isdigit(s[fast]))) fast --;
-            while (slow < size && !(isalpha(s[slow]) || isdigit(s[slow]))) slow ++;
+        int end = size-1;
+        int start = 0;
+        while (end > start) 
+        {
+            while (end >= 0 && !(isalpha(s[end]) || isdigit(s[end]))) 
+                end--;
+            while (start < size && !(isalpha(s[start]) || isdigit(s[start]))) 
+                start++;
             
-            if (fast >= 0 && slow < size) {
-                if (!(isalpha(s[fast]) ^ isdigit(s[slow]))) return false;
-                else if (tolower(s[fast]) != tolower(s[slow])) return false;
+            if (end >= 0 && start < size) 
+            {
+                if (!(isalpha(s[end]) ^ isdigit(s[start]))) 
+                    return false;
+                else if (tolower(s[end]) != tolower(s[start])) 
+                    return false;
             }
                 
-            fast --;
-            slow ++;
+            end--;
+            start ++;
         }
         return true;
     }
