@@ -67,6 +67,8 @@ public:
 
 // Method 2
 /*
+DRY RUN
+
 S: "ababcbacadefegdehijhklij"
 		 {a, b, c,  d,  e,  f,  g,  h,  i,  j,  k,  l}
 end_idx: {8, 5, 7, 14, 15, 11, 13, 19, 22, 23, 20, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}

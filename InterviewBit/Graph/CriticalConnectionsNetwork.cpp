@@ -67,7 +67,47 @@ public:
     }
 };
 
-
+/*
+class Solution {
+public:
+    vector<vector<int>> criticalConnections(int n, vector<vector<int>>& connections) {
+        vector<int> * adj = new vector<int>[n]{};
+        int numEdge = connections.size();
+        int *visited = new int[n]{};
+        for(int i=0; i<n; i++){
+            visited[i] = -1;
+        }
+        int *low = new int[n]{};
+        int order=0;
+        vector<vector<int>> res{};
+        for(int i=0; i<numEdge; i++){
+            adj[connections[i][0]].push_back(connections[i][1]);
+            adj[connections[i][1]].push_back(connections[i][0]);
+        }
+        DFS(adj, res, 0, visited, low, order, -1);
+        return res;
+    }
+    
+    void DFS(vector<int>* adj, vector<vector<int>>& res, int node, int* visited, int* low, int& order, int parent){
+        visited[node] = low[node] = ++order;
+        for(int i: adj[node]){
+            if(i == parent){
+                continue;
+            }
+            if(visited[i]<0){
+                DFS(adj, res, i, visited, low, order, node);
+                if(low[i]>visited[node]){
+                    res.push_back(vector<int> {node, i});
+                }
+                low[node] = min(low[node], low[i]);
+            }
+            else{
+                low[node] = min(low[node], visited[i]);
+            }
+        }
+    }
+};
+*/
 
 
 /*
@@ -109,4 +149,3 @@ public:
 };
 
 */
-
