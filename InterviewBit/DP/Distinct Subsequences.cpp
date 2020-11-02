@@ -80,8 +80,10 @@ int Solution::numDistinct(string A, string B) {
     vector<vector<int>> path(m + 1, vector<int>(n + 1, 0));
     for (int k = 0; k <= n; k++) path[0][k] = 1;    // initialization
 
-    for (int j = 1; j <= n; j++) {
-        for (int i = 1; i <= m; i++) {
+    for (int j = 1; j <= n; j++) 
+	{
+        for (int i = 1; i <= m; i++) 
+		{
             path[i][j] = path[i][j - 1] + (B[i - 1] == A[j - 1] ? path[i - 1][j - 1] : 0);
         }
     }

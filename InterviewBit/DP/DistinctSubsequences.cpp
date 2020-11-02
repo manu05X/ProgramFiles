@@ -44,32 +44,65 @@ Explanation 2:
 
 */
 
-int Solution::numDistinct(string S, string T) {
-    int rows = T.size(), cols = S.size();
+/*
+S: "rabbbit"
+T: "rabbit"
 
-    if(rows > cols){
-        return 0;
+rows: 6
+cols: 7
+
+__vla_expr0: 7
+__vla_expr1: 8
+
+dp: {
+     {1, 1, 1, 1, 1, 1, 1, 1}, 
+     {0, 1, 1, 1, 1, 1, 1, 1}, 
+     {0, 0, 1, 1, 1, 1, 1, 1}, 
+     {0, 0, 0, 1, 2, 3, 3, 3}, 
+     {0, 0, 0, 0, 1, 3, 3, 3}, 
+     {0, 0, 0, 0, 0, 0, 3, 3}, 
+     {0, 0, 0, 0, 0, 0, 0, 3}
     }
-    
-    vector<vector<int> > temp(rows+1, vector<int>(cols+1, 0));
-    
-    for(int i = 0; i <= cols; i++){
-        temp[0][i] = 1;
-    }
-    
-    for(int i = 1; i <= rows; i++){
-        for(int j = i; j <= cols; j++){
-            if(S[j-1] == T[i-1]){
-                temp[i][j] = temp[i-1][j-1] + temp[i][j-1];
-            }
-            else{
-                temp[i][j] = temp[i][j-1];
+
+Output: 3
+*/
+
+
+class Solution {
+public:
+    int numDistinct(string S, string T) {
+        int rows = T.length();
+        int cols = S.length();
+        
+        // vector<vector<long long>> temp(rows+1, vector<long long>(cols+1, 0));
+        
+        long long dp[rows+1][cols+1];
+
+
+        if (rows > cols) 
+            return 0;
+
+        for(int i = 1; i <= rows; i++)
+            dp[i][0] = 0;
+
+        for(int j = 0; j <= cols; j++)
+            dp[0][j] = 1;
+
+        for(int i = 1; i <= rows; i++)
+        {
+            for(int j = 1; j <= cols; j++)
+            {
+                if(T[i-1]!=S[j-1])
+                {
+                    dp[i][j] = dp[i][j-1];
+                }
+                else
+                    dp[i][j] = (dp[i][j-1] + dp[i-1][j-1])% 1000000007;
             }
         }
+        return dp[rows][cols];
     }
-    
-    return temp[rows][cols];
-}
+};
 
 
 /*
