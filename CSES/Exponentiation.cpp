@@ -11,23 +11,27 @@ const int M = 1000000007;
 
 int pow(ll a, ll b, int m) 
 {
-  ll r = 1, e = a;
-  while (b) 
+  ll res = 1, e = a; // Initialize res
+  while (b>0) 
   {
+	  // If b is odd, multiply e with result 
     if (b & 1) 
-		r = (r * e) % m;
+		res = (res * e) % m;
+    // n must be even now
+	b >>= 1;// b = b/2 
+	e = (e * e) % m; // Change e to e^2 
     
-	e = (e * e) % m;
-    b >>= 1;
   }
-  return r;
+  return res;
 }
 
 int main() {
   int n;
+  cout << "Enter testcases:";
   cin >> n;
   while (n--) {
     int a, b;
+    cout << "Enter both number:";
     cin >> a >> b;
     cout << pow(a, b, M) << endl;
   }

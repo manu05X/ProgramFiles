@@ -1,17 +1,24 @@
-// https://cses.fi/problemset/task/1083/
+// https://cses.fi/problemset/task/1094
 #include <iostream>
 
 using namespace std;
 
-typedef long long ll;
+typedef unsigned long long ll;
 
 int main() {
-  int n, x;
-  cin >> n;
-  ll sum = 0;
-  for (int i = 0; i < n - 1; i++) {
-    cin >> x;
-    sum += x;
+  ll n, pre, count = 0, in;
+  cin >> n >>pre;
+  while(--n > 0)
+  {
+    cin >> in;
+    if(pre > in)
+    {
+      count += pre - in;
+    }
+    else
+    {
+      pre = in;
+    }
   }
-  cout << ll(n) * (n + 1) / 2 - sum << endl;
+  cout << count << endl;
 }
