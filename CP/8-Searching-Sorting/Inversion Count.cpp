@@ -1,9 +1,4 @@
-/*
 
-				Name: Mehul Chaturvedi
-				IIT-Guwahati
-
-*/
 /*
 				PROBLEM STATEMENT
 Let A[0 ... n-1] be an array of n distinct positive integers. 
