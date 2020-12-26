@@ -7,6 +7,36 @@ https://leetcode.com/problems/longest-substring-without-repeating-characters/
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
+        int n = s.size(), len = 0;
+        vector<int>prev(128,-1); // current index of character
+        // try to extend the range [left, right]
+		int left = 0,right = 0;
+        while(right < n) 
+        {
+            // if char at right is in map then increase the left to curr right + 1 provided it is not present in left of left
+            if(prev[s[right]] != -1)
+                left = max(prev[s[right]]+1, left);
+            
+            //update the current index in hashmap
+            prev[s[right]] = right;
+            
+			int currLen = right-left+1; // length of current subString
+            len = max(len, currLen); // if currLen id greater then len then upadte it
+            
+            right++;
+            
+        }
+        return len;
+    }
+};
+
+
+
+
+/*
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
         int n = s.size(),res = 0;
         for(int i = 0; i < n; i++)
         {
@@ -26,7 +56,6 @@ public:
     }
 };
 
-/*
 
 public class Solution {
   public int lengthOfLongestSubstring(String s) {
