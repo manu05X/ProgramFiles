@@ -6,6 +6,52 @@ https://leetcode.com/problems/trapping-rain-water/
 
 //sol->
 
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int n = height.size();       
+        int res = 0;
+        // maximum element on left and right 
+        int maxLeft = 0, maxRight = 0;
+        // indices to traverse the array  
+        int left = 0,right = n -1;
+        
+        while(left <= right)
+        {
+            if(height[left] <= height[right])
+            {
+                if(height[left] >= maxLeft)
+                {
+                    // update max in left 
+                    maxLeft = height[left];
+                }
+                else
+                {
+                    // water on curr element = max - curr 
+                    res += maxLeft - height[left];
+                }
+                left++;
+            }
+            else
+            {
+                if(height[right] >= maxRight)
+                {
+                    // update right maximum 
+                    maxRight = height[right];
+                }
+                else
+                {
+                    // water on curr element = max - curr
+                    res += maxRight - height[right];
+                }
+                right--;
+            }  
+        }
+        return res;
+    }
+};
+
+
 //Method 2
 int trap(vector<int>& height)
 {
